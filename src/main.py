@@ -1,10 +1,13 @@
-import gettext
-import os
+from faststream import FastStream
+from faststream.redis import RedisBroker
 
-# Указываем путь к папке с переводами
-localedir = os.path.join(os.path.dirname(__file__), "locales")
-lang = gettext.translation("messages", localedir=localedir, languages=["ru"])
-lang.install()
+from bootstrap.config import get_config
+from presentation.message_queue.handlers.report import router
 
-# Теперь _() будет использовать перевод
-_ = lang.gettext
+
+def get_app() -> FastStream:
+    config = get_config()
+    broker = RedisBroker(config.message_queue_url)
+    broker.include_router(router)
+    app = FastStream(broker)
+    return app

@@ -13,6 +13,7 @@ CONFIG_FILE_PATH: Final[pathlib.Path] = ROOT_PATH / "config.toml"
 class Config:
     telegram_bot_token: str
     locale_language: str
+    message_queue_url: str
 
 
 @lru_cache
@@ -22,4 +23,5 @@ def get_config() -> Config:
     return Config(
         telegram_bot_token=config["telegram_bot"]["token"],
         locale_language=config["locale"]["language"],
+        message_queue_url=config["message_queue"]["url"],
     )

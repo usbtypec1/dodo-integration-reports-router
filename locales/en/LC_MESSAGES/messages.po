@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 20:11+0600\n"
+"POT-Creation-Date: 2025-04-07 22:13+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:13
-msgid "get"
-msgstr "get"
+#: src/presentation/ui/late_delivery_vouchers.py:19
+msgid "render:late_delivery_vouchers:title"
+msgstr "Late delivery vouchers (today) | (week before)"
+
+#: src/presentation/ui/late_delivery_vouchers.py:21
+msgid "render:late_delivery_vouchers:unit"
+msgstr "pcs"

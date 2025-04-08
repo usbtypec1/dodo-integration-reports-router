@@ -12,7 +12,7 @@ for lang in "${LANGUAGES[@]}"; do
 
     if [ -f "$PO_FILE" ]; then
         echo "Updating $PO_FILE..."
-        msgmerge --update "$PO_FILE" "$DOMAIN.pot"
+        msgmerge --update "$PO_FILE" "$LOCALES_DIR/$DOMAIN.pot"
     else
         echo "Creating $PO_FILE..."
         cp "$LOCALES_DIR/$DOMAIN.pot" "$PO_FILE"

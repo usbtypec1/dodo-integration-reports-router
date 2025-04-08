@@ -20,6 +20,7 @@ class TelegramApiGateway:
                 text=text,
                 parse_mode=ParseMode.HTML,
             )
-        except TelegramAPIError:
+        except TelegramAPIError as error:
+            print(error)
             logger.error("Error sending message to chat_id %s", chat_id)
             await asyncio.sleep(1)

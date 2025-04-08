@@ -17,7 +17,7 @@ class Event(BaseModel):
     payload: dict | list
 
 
-@router.subscriber("reports")
+@router.subscriber("reports-router")
 @inject
 async def on_report(
     event: Event,

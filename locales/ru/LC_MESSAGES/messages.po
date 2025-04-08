@@ -8,19 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 21:58+0600\n"
+"POT-Creation-Date: 2025-04-09 01:07+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/presentation/ui/late_delivery_vouchers.py:16
+#: src/presentation/ui/late_delivery_vouchers.py:19
 msgid "render:late_delivery_vouchers:title"
 msgstr "Сертификаты за опоздание (сегодня) | (неделю назад)"
 
-#: src/presentation/ui/late_delivery_vouchers.py:17
+#: src/presentation/ui/late_delivery_vouchers.py:21
 msgid "render:late_delivery_vouchers:unit"
 msgstr "шт"
+
+#: src/presentation/ui/inventory_stocks.py:27
+msgid "render:inventory_stocks:runs_out_today"
+msgstr "❗️ На сегодня не хватит ❗️"
+
+#: src/presentation/ui/inventory_stocks.py:30
+msgid "render:inventory_stocks:remaining"
+msgstr "остаток"

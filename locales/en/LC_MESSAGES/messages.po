@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 01:07+0600\n"
+"POT-Creation-Date: 2025-04-09 01:19+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,10 +25,26 @@ msgstr "Late delivery vouchers (today) | (week before)"
 msgid "render:late_delivery_vouchers:unit"
 msgstr "pcs"
 
+#: src/presentation/ui/inventory_stocks.py:24
+msgid "render:inventory_stocks:measurement_unit:quantity"
+msgstr "pcs"
+
+#: src/presentation/ui/inventory_stocks.py:25
+msgid "render:inventory_stocks:measurement_unit:kilogram"
+msgstr "kg"
+
+#: src/presentation/ui/inventory_stocks.py:26
+msgid "render:inventory_stocks:measurement_unit:liter"
+msgstr "L"
+
 #: src/presentation/ui/inventory_stocks.py:27
+msgid "render:inventory_stocks:measurement_unit:meter"
+msgstr "m"
+
+#: src/presentation/ui/inventory_stocks.py:34
 msgid "render:inventory_stocks:runs_out_today"
 msgstr "❗️ Not enough for today ❗️"
 
-#: src/presentation/ui/inventory_stocks.py:30
+#: src/presentation/ui/inventory_stocks.py:37
 msgid "render:inventory_stocks:remaining"
 msgstr "stock"

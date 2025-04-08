@@ -14,7 +14,7 @@ class UnitLateDeliveryVoucherStatistics(TypedDict):
 
 def render_late_delivery_vouchers(
     units_statistics: Iterable[UnitLateDeliveryVoucherStatistics],
-) -> str:
+) -> list[str]:
     lines: list[str] = [Bold(_("render:late_delivery_vouchers:title")).as_html()]
     unit_message = _("render:late_delivery_vouchers:unit")
 
@@ -25,4 +25,4 @@ def render_late_delivery_vouchers(
             f" | {unit['vouchers_count_for_week_before']} {unit_message}"
         )
 
-    return "\n".join(lines)
+    return ["\n".join(lines)]

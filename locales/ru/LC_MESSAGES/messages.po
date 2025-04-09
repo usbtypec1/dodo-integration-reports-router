@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 01:19+0600\n"
+"POT-Creation-Date: 2025-04-09 20:55+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/presentation/ui/late_delivery_vouchers.py:19
+#: src/presentation/ui/late_delivery_vouchers.py:18
 msgid "render:late_delivery_vouchers:title"
 msgstr "Сертификаты за опоздание (сегодня) | (неделю назад)"
 
-#: src/presentation/ui/late_delivery_vouchers.py:21
+#: src/presentation/ui/late_delivery_vouchers.py:19
 msgid "render:late_delivery_vouchers:unit"
 msgstr "шт"
+
+#: src/presentation/ui/sales_statistics.py:26
+msgid "render:sales_statistics:title"
+msgstr "Выручка за сегодня"
 
 #: src/presentation/ui/inventory_stocks.py:24
 msgid "render:inventory_stocks:measurement_unit:quantity"

@@ -4,20 +4,13 @@ from typing import TypedDict
 from aiogram.utils.formatting import Bold
 
 from presentation.i18n import gettext as _
+from presentation.ui.common import format_percentage, int_gaps
 
 
 class UnitSalesStatistics(TypedDict):
     unit_name: str
     sales_for_today: float
     growth_percentage: int
-
-
-def int_gaps(number: int | float) -> str:
-    return f"{number:_}".replace("_", " ")
-
-
-def display_percentage(number: int | float) -> str:
-    return f"{number:+}%"
 
 
 def render_sales_statistics(
@@ -39,6 +32,6 @@ def render_sales_statistics(
         lines.append(
             f"{unit_name}"
             f" | {int_gaps(sales_for_today)}"
-            f" | {display_percentage(growth_percentage)}"
+            f" | {format_percentage(growth_percentage)}"
         )
     return ["\n".join(lines)]

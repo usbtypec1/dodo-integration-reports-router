@@ -38,4 +38,4 @@ def render_production_productivity(
             f" | {format_percentage(growth_percentage)}"
         )
 
-    return "\n".join(lines)
+    return ["\n".join(lines)]

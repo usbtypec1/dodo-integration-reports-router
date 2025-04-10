@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "aiogram>=3.19.0",
     "faststream[cli,redis]>=0.5.37",
+    "humanize>=4.12.2",
 ]
 
 [dependency-groups]

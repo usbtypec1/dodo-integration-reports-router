@@ -6,6 +6,7 @@ from presentation.ui.production_productivity import (
     render_production_productivity,
 )
 from presentation.ui.sales_statistics import render_sales_statistics
+from presentation.ui.stop_sales_by_sectors import render_stop_sales_by_sectors
 
 type Renderer = Callable[..., list[str]]
 
@@ -15,4 +16,5 @@ REPORT_TYPE_ID_TO_RENDERER: dict[str, Renderer] = {
     "inventory_stocks": render_inventory_stocks,
     "sales": render_sales_statistics,
     "production_productivity": render_production_productivity,
+    "stop_sales_by_sectors": render_stop_sales_by_sectors,
 }

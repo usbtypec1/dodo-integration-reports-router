@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 22:25+0600\n"
+"POT-Creation-Date: 2025-04-10 22:13+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,25 @@ msgstr "Late delivery vouchers (today) | (week before)"
 msgid "render:late_delivery_vouchers:unit"
 msgstr "pcs"
 
-#: src/presentation/ui/sales_statistics.py:19
+#: src/presentation/ui/stop_sales_by_sectors.py:88
+#, fuzzy
+msgid "render:stop_sales_by_sectors:since"
+msgstr "Sales for today"
+
+#: src/presentation/ui/stop_sales_by_sectors.py:96
+#, fuzzy
+msgid "render:stop_sales_by_sectors:title"
+msgstr "Sales for today"
+
+#: src/presentation/ui/sales_statistics.py:29
 msgid "render:sales_statistics:title"
 msgstr "Sales for today"
 
-#: src/presentation/ui/production_productivity.py:22
+#: src/presentation/ui/sales_statistics.py:55
+msgid "render:sales_statistics:total"
+msgstr "Total: %(sales)s | %(growth_percentage)s"
+
+#: src/presentation/ui/production_productivity.py:21
 msgid "render:production_productivity:title"
 msgstr "Sales per person/hour"
 

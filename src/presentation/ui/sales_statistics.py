@@ -13,13 +13,23 @@ class UnitSalesStatistics(TypedDict):
     growth_percentage: int
 
 
+class TotalSalesStatistics(TypedDict):
+    sales_for_today: float
+    growth_percentage: int
+
+
+class SalesStatisttics(TypedDict):
+    units_breakdown: list[UnitSalesStatistics]
+    total: TotalSalesStatistics
+
+
 def render_sales_statistics(
-    units_sales_statistics: Iterable[UnitSalesStatistics],
+    sales_statistics: SalesStatisttics,
 ) -> list[str]:
     lines: list[str] = [Bold(_("render:sales_statistics:title")).as_html()]
 
     units_sales_statistics = sorted(
-        units_sales_statistics,
+        sales_statistics["units_breakdown"],
         key=lambda unit: unit["sales_for_today"],
         reverse=True,
     )
@@ -34,4 +44,19 @@ def render_sales_statistics(
             f" | {int_gaps(sales_for_today)}"
             f" | {format_percentage(growth_percentage)}"
         )
+
+    total_sales = int_gaps(sales_statistics["total"]["sales_for_today"])
+    total_growth_percentage = format_percentage(
+        sales_statistics["total"]["growth_percentage"]
+    )
+
+    lines.append(
+        Bold(
+            _("render:sales_statistics:total")
+            % {
+                "sales": total_sales,
+                "growth_percentage": total_growth_percentage,
+            },
+        ).as_html()
+    )
     return ["\n".join(lines)]

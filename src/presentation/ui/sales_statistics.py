@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from typing import TypedDict
 
 from aiogram.utils.formatting import Bold

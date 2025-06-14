@@ -1,23 +1,12 @@
 import datetime
 from collections.abc import Iterable
-from typing import Final, TypedDict
+from typing import Final
 from zoneinfo import ZoneInfo
 
 import humanize
 
+from domain.entities.stop_sales_by_sectors import UnitStopSalesBySectors
 from presentation.i18n import gettext as _
-
-
-class StopSale(TypedDict):
-    sector_name: str
-    started_at: str
-
-
-class UnitStopSalesBySectors(TypedDict):
-    unit_name: str
-    stop_sales: list[StopSale]
-    timezone: str
-
 
 MINUTE_IN_SECONDS: Final[int] = 60
 HOUR_IN_SECONDS: Final[int] = MINUTE_IN_SECONDS * 60
@@ -89,15 +78,15 @@ def render_stop_sales_by_sectors(
 
     result: list[str] = []
     for unit_stop_sales in units_stop_sales:
-        unit_name = unit_stop_sales["unit_name"]
-        timezone = ZoneInfo(unit_stop_sales["timezone"])
+        timezone = ZoneInfo(unit_stop_sales.timezone)
 
         lines: list[str] = [
-            _("render:stop_sales_by_sectors:title") % {"unit_name": unit_name}
+            _("render:stop_sales_by_sectors:title")
+            % {"unit_name": unit_stop_sales.unit_name}
         ]
-        for stop_sale in unit_stop_sales["stop_sales"]:
+        for stop_sale in unit_stop_sales.stop_sales:
             started_at = parse_datetime(
-                date_string=stop_sale["started_at"],
+                date_string=stop_sale.started_at,
                 timezone=timezone,
             )
             stop_sale_duration = compute_duration(
@@ -106,9 +95,8 @@ def render_stop_sales_by_sectors(
             )
             humanized_duration = humanize_stop_sale_duration(stop_sale_duration)
 
-            sector_name = stop_sale["sector_name"]
             lines.append(
-                f"{sector_name} - {humanized_duration}"
+                f"{stop_sale.sector_name} - {humanized_duration}"
                 f" ({since_message} {started_at:%H:%M})"
             )
 

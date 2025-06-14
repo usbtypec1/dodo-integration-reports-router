@@ -1,15 +1,11 @@
 from collections.abc import Iterable
-from typing import TypedDict
 
 from aiogram.utils.formatting import Bold
 
+from domain.entities.late_delivery_vouchers import (
+    UnitLateDeliveryVoucherStatistics,
+)
 from presentation.i18n import gettext as _
-
-
-class UnitLateDeliveryVoucherStatistics(TypedDict):
-    unit_name: str
-    vouchers_count_for_today: int
-    vouchers_count_for_week_before: int
 
 
 def render_late_delivery_vouchers(
@@ -20,9 +16,9 @@ def render_late_delivery_vouchers(
 
     for unit in units_statistics:
         lines.append(
-            f"{unit['unit_name']}"
-            f" | {unit['vouchers_count_for_today']} {unit_message}"
-            f" | {unit['vouchers_count_for_week_before']} {unit_message}"
+            f"{unit.unit_name}"
+            f" | {unit.vouchers_count_for_today} {unit_message}"
+            f" | {unit.vouchers_count_for_week_before} {unit_message}"
         )
 
     return ["\n".join(lines)]

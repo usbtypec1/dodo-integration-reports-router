@@ -1,12 +1,13 @@
 import datetime
 from collections.abc import Iterable
-from typing import Final
+from typing import Final, override
 from zoneinfo import ZoneInfo
 
 import humanize
 
 from domain.entities.stop_sales_by_sectors import UnitStopSalesBySectors
 from presentation.i18n import gettext as _
+from presentation.ui.base import TextView
 
 MINUTE_IN_SECONDS: Final[int] = 60
 HOUR_IN_SECONDS: Final[int] = MINUTE_IN_SECONDS * 60
@@ -71,35 +72,38 @@ def humanize_stop_sale_duration(duration: datetime.timedelta) -> str:
     return abbreviate_time_units(humanize.precisedelta(duration, **kwargs))
 
 
-def render_stop_sales_by_sectors(
-    units_stop_sales: Iterable[UnitStopSalesBySectors],
-) -> list[str]:
-    since_message = _("render:stop_sales_by_sectors:since")
+class StopSalesBySectorsView(TextView):
+    def __init__(self, payload: Iterable[UnitStopSalesBySectors]) -> None:
+        self.__units_stop_sales = payload
 
-    result: list[str] = []
-    for unit_stop_sales in units_stop_sales:
-        timezone = ZoneInfo(unit_stop_sales.timezone)
+    @override
+    def get_texts(self) -> list[str]:
+        since_message = _("render:stop_sales_by_sectors:since")
 
-        lines: list[str] = [
-            _("render:stop_sales_by_sectors:title")
-            % {"unit_name": unit_stop_sales.unit_name}
-        ]
-        for stop_sale in unit_stop_sales.stop_sales:
-            started_at = parse_datetime(
-                date_string=stop_sale.started_at,
-                timezone=timezone,
-            )
-            stop_sale_duration = compute_duration(
-                started_at=started_at,
-                timezone=timezone,
-            )
-            humanized_duration = humanize_stop_sale_duration(stop_sale_duration)
+        result: list[str] = []
+        for unit_stop_sales in self.__units_stop_sales:
+            timezone = ZoneInfo(unit_stop_sales.timezone)
 
-            lines.append(
-                f"{stop_sale.sector_name} - {humanized_duration}"
-                f" ({since_message} {started_at:%H:%M})"
-            )
+            lines: list[str] = [
+                _("render:stop_sales_by_sectors:title")
+                % {"unit_name": unit_stop_sales.unit_name}
+            ]
+            for stop_sale in unit_stop_sales.stop_sales:
+                started_at = parse_datetime(
+                    date_string=stop_sale.started_at,
+                    timezone=timezone,
+                )
+                stop_sale_duration = compute_duration(
+                    started_at=started_at,
+                    timezone=timezone,
+                )
+                humanized_duration = humanize_stop_sale_duration(stop_sale_duration)
 
-        result.append("\n".join(lines))
+                lines.append(
+                    f"{stop_sale.sector_name} - {humanized_duration}"
+                    f" ({since_message} {started_at:%H:%M})"
+                )
 
-    return result
+            result.append("\n".join(lines))
+
+        return result

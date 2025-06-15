@@ -31,7 +31,7 @@ async def on_report(
     telegram_api_gateway: FromDishka[TelegramApiGateway],
 ) -> None:
     try:
-        render, pydantic_model = REPORT_TYPE_ID_TO_RENDERER_AND_PYDANTIC_MODEL[
+        view_class, pydantic_model = REPORT_TYPE_ID_TO_RENDERER_AND_PYDANTIC_MODEL[
             event.report_type_id
         ]
     except KeyError:
@@ -51,9 +51,11 @@ async def on_report(
         )
         return
 
+    view = view_class(payload)
+
     await SendMessageToTelegramInteractor(
         telegram_api_gateway=telegram_api_gateway,
         chat_ids=event.chat_ids,
-        render=render,
+        view=view,
         payload=payload,
     ).execute()

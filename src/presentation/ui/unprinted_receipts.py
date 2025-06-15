@@ -1,3 +1,5 @@
+from typing import override
+
 from domain.entities.unprinted_receipts import UnitUnprintedReceipts
 from presentation.i18n import gettext as _
 from presentation.ui.base import TextView
@@ -8,7 +10,8 @@ class UnitUnprintedReceiptsView(TextView):
     def __init__(self, payload: UnitUnprintedReceipts):
         self.__unit_unprinted_receipts = payload
 
-    def get_text(self) -> str:
+    @override
+    def get_texts(self) -> list[str]:
         unit_name = self.__unit_unprinted_receipts.unit_name
         orders = self.__unit_unprinted_receipts.orders
 
@@ -21,4 +24,4 @@ class UnitUnprintedReceiptsView(TextView):
         for order in orders:
             lines.append(f"{order.number} / {int_gaps(order.price)}")
 
-        return "\n".join(lines)
+        return ["\n".join(lines)]

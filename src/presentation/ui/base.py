@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 from aiogram.types import (
     ForceReply,
     InlineKeyboardMarkup,
@@ -10,12 +12,13 @@ type ReplyMarkup = (
 )
 
 
-class TextView:
+class TextView(ABC):
     text: str
     reply_markup: ReplyMarkup | None = None
 
-    def get_text(self) -> str:
-        return self.text
+    @abstractmethod
+    def get_texts(self) -> list[str]:
+        return [self.text]
 
     def get_reply_markup(self) -> ReplyMarkup | None:
         return self.reply_markup

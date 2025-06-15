@@ -1,4 +1,4 @@
-from collections.abc import Callable
+from typing import Any, Protocol
 
 from pydantic import BaseModel, TypeAdapter
 
@@ -11,15 +11,15 @@ from domain.entities.production_productivity import (
 )
 from domain.entities.sales import SalesStatisttics
 from domain.entities.stop_sales_by_sectors import UnitStopSalesBySectors
-from presentation.ui.inventory_stocks import render_inventory_stocks
-from presentation.ui.late_delivery_vouchers import render_late_delivery_vouchers
+from presentation.ui.base import ReplyMarkup
+from presentation.ui.inventory_stocks import InventoryStocksView
+from presentation.ui.late_delivery_vouchers import LateDeliveryVouchersView
 from presentation.ui.production_productivity import (
-    render_production_productivity,
+    ProductionProductivityView,
 )
-from presentation.ui.sales_statistics import render_sales_statistics
-from presentation.ui.stop_sales_by_sectors import render_stop_sales_by_sectors
+from presentation.ui.sales_statistics import SalesStatisticsView
+from presentation.ui.stop_sales_by_sectors import StopSalesBySectorsView
 
-type Renderer = Callable[..., list[str]]
 type PydanticModel = type[BaseModel] | TypeAdapter
 
 
@@ -32,27 +32,35 @@ def parse_payload(
     return pydantic_model.model_validate(payload)
 
 
+class ReportView(Protocol):
+    def __init__(self, payload: Any) -> None: ...
+
+    def get_texts(self) -> list[str]: ...
+
+    def get_reply_markup(self) -> ReplyMarkup | None: ...
+
+
 REPORT_TYPE_ID_TO_RENDERER_AND_PYDANTIC_MODEL: dict[
-    str, tuple[Renderer, PydanticModel]
+    str, tuple[type[ReportView], PydanticModel]
 ] = {
     "late_delivery_vouchers": (
-        render_late_delivery_vouchers,
+        LateDeliveryVouchersView,
         TypeAdapter(list[UnitLateDeliveryVoucherStatistics]),
     ),
     "inventory_stocks": (
-        render_inventory_stocks,
+        InventoryStocksView,
         TypeAdapter(list[UnitInventoryStocks]),
     ),
     "sales": (
-        render_sales_statistics,
+        SalesStatisticsView,
         SalesStatisttics,
     ),
     "production_productivity": (
-        render_production_productivity,
+        ProductionProductivityView,
         TypeAdapter(list[UnitProductionProductivityStatistics]),
     ),
     "stop_sales_by_sectors": (
-        render_stop_sales_by_sectors,
+        StopSalesBySectorsView,
         TypeAdapter(list[UnitStopSalesBySectors]),
     ),
 }

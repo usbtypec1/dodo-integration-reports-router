@@ -1,6 +1,6 @@
 import operator
 from collections.abc import Iterable
-from typing import Final
+from typing import Final, override
 from uuid import UUID
 
 from domain.entities.canceled_orders import CanceledOrder, UnitCanceledOrders
@@ -100,7 +100,8 @@ class UnitCanceledOrdersView(TextView):
     def __init__(self, payload: UnitCanceledOrders):
         self.__unit_canceled_orders = payload
 
-    def get_text(self) -> str:
+    @override
+    def get_texts(self) -> list[str]:
         country_code = self.__unit_canceled_orders.country_code
         currency_symbol = COUNTRY_CODE_TO_CURRENCY_SYMBOL.get(country_code, "")
 
@@ -122,4 +123,4 @@ class UnitCanceledOrdersView(TextView):
             "currency_symbol": currency_symbol,
         }
 
-        return f"{title}\n\n{orders_text}\n\n{total}"
+        return [f"{title}\n\n{orders_text}\n\n{total}"]

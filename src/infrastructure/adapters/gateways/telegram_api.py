@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from dataclasses import dataclass
+from typing import override
 
 from aiogram import Bot
 from aiogram.enums import ParseMode
@@ -11,18 +12,25 @@ from aiogram.exceptions import (
     TelegramServerError,
 )
 
+from application.ports.gateways.telegram_api import (
+    TelegramApiGateway as ITelegramApiGateway,
+)
+from presentation.ui.base import ReplyMarkup
+
 logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class TelegramApiGateway:
+class TelegramApiGateway(ITelegramApiGateway):
     bot: Bot
 
+    @override
     async def send_message(
         self,
         *,
         chat_id: int,
         text: str,
+        reply_markup: ReplyMarkup | None = None,
         attempts: int = 10,
     ) -> None:
         for attempt in range(attempts):
@@ -31,6 +39,7 @@ class TelegramApiGateway:
                     chat_id=chat_id,
                     text=text,
                     parse_mode=ParseMode.HTML,
+                    reply_markup=reply_markup,
                 )
             except (
                 TelegramRetryAfter,

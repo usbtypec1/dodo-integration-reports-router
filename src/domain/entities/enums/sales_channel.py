@@ -1,13 +1,7 @@
-from enum import StrEnum, auto
+from enum import StrEnum
 
 
 class SalesChannel(StrEnum):
-    DINE_IN = auto()
-    TAKEAWAY = auto()
-    DELIVERY = auto()
-
-
-class StopSaleSalesChannel(StrEnum):
     DINE_IN = "Dine-in"
     TAKEAWAY = "Takeaway"
     DELIVERY = "Delivery"
